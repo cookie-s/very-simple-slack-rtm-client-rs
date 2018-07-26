@@ -1,0 +1,11 @@
+[package]
+name = "very-simple-slack-rtm-client"
+version = "0.1.0"
+authors = ["cookie-s <cookie-s@users.noreply.github.com>"]
+
+[dependencies]
+config = "0.9.0"
+slack = "0.21.0"
+
+[replace]
+"slack_api:0.20.0" = { git = "https://github.com/cookie-s/slack-rs-api", branch = "master" }
