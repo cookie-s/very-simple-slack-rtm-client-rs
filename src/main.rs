@@ -33,11 +33,7 @@ fn main() {
     for (team, token) in tokens {
         children.push(thread::spawn(move || {
             let rtm = slack::RtmClient::login(&token).unwrap();
-            let mut handler = slack_handler::VerySimpleHandler {
-                team: &team,
-                channels: HashMap::new(),
-                users: HashMap::new(),
-            };
+            let mut handler = slack_handler::VerySimpleHandler::new(&team);
             let res = rtm.run(&mut handler);
             let stdout = std::io::stdout();
             let _ = writeln!(&mut stdout.lock(), "handler for {} ended.", team);

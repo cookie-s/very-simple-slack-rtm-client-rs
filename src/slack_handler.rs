@@ -1,16 +1,24 @@
-extern crate std;
 extern crate slack;
+extern crate std;
 
 use std::io::Write;
 use std::collections::HashMap;
 
 pub struct VerySimpleHandler<'a> {
     pub team: &'a str,
-    pub channels: HashMap<String, slack::api::Channel>,
-    pub users: HashMap<String, slack::api::User>,
+    channels: HashMap<String, slack::api::Channel>,
+    users: HashMap<String, slack::api::User>,
 }
 
 impl<'a> VerySimpleHandler<'a> {
+    pub fn new(team_name: &str) -> VerySimpleHandler {
+        VerySimpleHandler {
+            team: team_name,
+            channels: HashMap::new(),
+            users: HashMap::new(),
+        }
+    }
+
     fn get_chan_name(&self, chan_id: &String) -> String {
         if let Some(chan) = self.channels.get(chan_id) {
             if let Some(chan_name) = &chan.name {
